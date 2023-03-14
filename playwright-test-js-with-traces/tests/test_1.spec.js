@@ -1,25 +1,8 @@
-// const { test } = require('../lambdatest-setup')
-var { expect, test } = require('@playwright/test')
-
-test = test.extend({
-  page: async ({ page, playwright }, use, testInfo) => {
-      await use(page)
-
-      const testStatus = {
-        action: 'setTestStatus',
-        arguments: {
-          status: testInfo.status,
-          remark: testInfo.error?.stack || testInfo.error?.message,
-        }
-      }
-      await page.evaluate(() => {},
-        `lambdatest_action: ${JSON.stringify(testStatus)}`)
-      await page.close()
-  }
-})
+const { test } = require('../fixtures')
+const { expect } = require('@playwright/test')
 
 test.describe('Browse LambdaTest in different search engines', () => {
-  test.only('Search LambdaTest on Bing', async ({ page }) => {
+  test('Search LambdaTest on Bing', async ({ page }) => {
     await page.goto('https://www.bing.com')
     const element = await page.$('[id="sb_form_q"]')
     await element.click()

@@ -1,5 +1,5 @@
-// const { test } = require('../lambdatest-setup')
-const { expect, test } = require('@playwright/test')
+const { test } = require('../fixtures')
+const { expect } = require('@playwright/test')
 
 test.describe('Browse LambdaTest in different browser contexts', () => {
   test('Search LambdaTest on Bing and DuckDuckGo', async ({ page }, testInfo) => {
